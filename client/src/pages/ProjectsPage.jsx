@@ -35,6 +35,7 @@ export function ProjectsPage() {
   const { data: projects, loading, error } = useFetch(`${API_BASE}/api/projects`)
   const [activeFilter, setActiveFilter] = useState({})
   const [visibleCount, setVisibleCount] = useState({})
+  const [searchQuery, setSearchQuery] = useState({})
 
   if (loading) return <LoadingSpinner />
   if (error) return <ErrorMessage message={error} />
