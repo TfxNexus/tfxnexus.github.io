@@ -7,7 +7,13 @@ import resumeRouter from './routes/resume.js'
 const app = express()
 const PORT = 3001
 
-app.use(cors())
+app.use(cors({
+  origin: [
+    'http://localhost:5173',
+    /\.vercel\.app$/,
+    /\.github\.io$/,
+  ]
+}))
 app.use(express.json())
 
 app.use('/api', profileRouter)
