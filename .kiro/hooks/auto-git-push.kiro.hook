@@ -1,0 +1,19 @@
+{
+  "enabled": true,
+  "name": "Auto Git Push on Save",
+  "description": "Automatically stages, commits, and pushes changes to GitHub whenever a source file is saved",
+  "version": "1",
+  "when": {
+    "type": "fileEdited",
+    "patterns": [
+      "client/src/**",
+      "server/**",
+      "server/data/**"
+    ]
+  },
+  "then": {
+    "type": "runCommand",
+    "command": "git add -A && git diff --cached --quiet || git commit -m \"Auto-save: update source files\" && git push",
+    "timeout": 30
+  }
+}
