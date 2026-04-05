@@ -1,4 +1,4 @@
-const BASE = import.meta.env.VITE_API_URL ?? 'https://tfxnexus.onrender.com'
+const BASE = import.meta.env.VITE_API_URL || 'https://tfxnexus.onrender.com'
 
 export async function fetchResume() {
   const res = await fetch(`${BASE}/api/resume`)
