@@ -6,7 +6,7 @@ import { LoadingSpinner } from '../components/LoadingSpinner'
 import { ErrorMessage } from '../components/ErrorMessage'
 
 export function HomePage() {
-  const { data: profile, loading, error } = useFetch('/api/profile')
+  const { data: profile, loading, error } = useFetch(`${API_BASE}/api/profile`)
 
   if (loading) return <LoadingSpinner />
   if (error) return <ErrorMessage message={error} />
