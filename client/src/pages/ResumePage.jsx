@@ -6,7 +6,7 @@ import { ErrorMessage } from '../components/ErrorMessage'
 import { SkillTag } from '../components/SkillTag'
 
 export function ResumePage() {
-  const { data: resume, loading, error } = useFetch('/api/resume')
+  const { data: resume, loading, error } = useFetch(`${API_BASE}/api/resume`)
 
   if (loading) return <LoadingSpinner />
   if (error) return <ErrorMessage message={error} />
