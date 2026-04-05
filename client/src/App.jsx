@@ -8,7 +8,8 @@ import { NotFoundPage } from './pages/NotFoundPage'
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-gray-900 text-gray-100">
+    <div className="min-h-screen bg-gray-900 dark:bg-gray-900 text-gray-100 dark:text-gray-100
+                    [html:not(.dark)_&]:bg-gray-50 [html:not(.dark)_&]:text-gray-900">
       <NavBar />
       <main>
         <Routes>
