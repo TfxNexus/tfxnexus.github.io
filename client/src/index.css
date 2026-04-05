@@ -6,12 +6,24 @@
   html {
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
+    background-color: #111827;
+    color: #f3f4f6;
+  }
+
+  html.dark {
+    background-color: #111827;
+    color: #f3f4f6;
+  }
+
+  html:not(.dark) {
+    background-color: #f9fafb;
+    color: #111827;
   }
 
   body {
     margin: 0;
-    background-color: #111827; /* gray-900 */
-    color: #f3f4f6; /* gray-100 */
+    background-color: inherit;
+    color: inherit;
   }
 
   #root {
