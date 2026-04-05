@@ -53,7 +53,9 @@ export function ProjectsPage() {
         {Object.entries(grouped).map(([category, items]) => {
           const subs = SUBCATEGORIES[category] || ['All']
           const filter = activeFilter[category] || 'All'
-          const filtered = filter === 'All' ? items : items.filter(p => p.subcategory === filter)
+          const query = (searchQuery[category] || '').toLowerCase()
+          const filtered = (filter === 'All' ? items : items.filter(p => p.subcategory === filter))
+            .filter(p => !query || p.title.toLowerCase().includes(query) || p.description.toLowerCase().includes(query))
           const shown = visibleCount[category] ?? PAGE_SIZE
           const visible = filtered.slice(0, shown)
           const hasMore = filtered.length > shown
