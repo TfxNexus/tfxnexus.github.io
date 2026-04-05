@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { useFetch } from '../hooks/useFetch'
+import { API_BASE } from '../lib/apiBase'
 import { AnimatedPage } from '../components/AnimatedPage'
 import { LoadingSpinner } from '../components/LoadingSpinner'
 import { ErrorMessage } from '../components/ErrorMessage'
