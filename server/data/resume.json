@@ -1,0 +1,12 @@
+{
+  "experience": [
+    {
+      "title": "Backend Intern",
+      "company": "Friend Group",
+      "period": "March 2025 – Present",
+      "description": "Worked on SQL for the backend using tables and views. Created a database and attempted to connect it to a frontend application."
+    }
+  ],
+  "education": [],
+  "skills": ["HTML", "CSS", "JavaScript", "React", "Java", "SQL"]
+}

@@ -1,0 +1,102 @@
+[
+  {
+    "id": "osu",
+    "title": "osu!",
+    "description": "A popular rhythm game I enjoy playing competitively. Great for hand-eye coordination and music appreciation.",
+    "category": "Games",
+    "techStack": [],
+    "repoUrl": null,
+    "liveUrl": "https://osu.ppy.sh",
+    "imageUrl": "/assets/osu-logo.jpg"
+  },
+  {
+    "id": "valorant",
+    "title": "Valorant",
+    "description": "A tactical first-person shooter by Riot Games. I enjoy the strategic team-based gameplay.",
+    "category": "Games",
+    "techStack": [],
+    "repoUrl": null,
+    "liveUrl": null,
+    "imageUrl": null
+  },
+  {
+    "id": "fortnite",
+    "title": "Fortnite",
+    "description": "A highly demanding battle royale with building mechanics. Fast-paced and creative.",
+    "category": "Games",
+    "techStack": [],
+    "repoUrl": null,
+    "liveUrl": null,
+    "imageUrl": "/assets/fortnite-logo.jpg"
+  },
+  {
+    "id": "static-portfolio",
+    "title": "Static Portfolio Site",
+    "description": "My original personal portfolio built with plain HTML and CSS. The foundation this app is migrating from.",
+    "category": "Personal Projects",
+    "techStack": ["HTML", "CSS"],
+    "repoUrl": "https://github.com/TfxNexus",
+    "liveUrl": null,
+    "imageUrl": null
+  },
+  {
+    "id": "sql-database",
+    "title": "SQL Database Project",
+    "description": "A backend database project built during an internship. Involved designing tables, views, and connecting to a frontend.",
+    "category": "Personal Projects",
+    "techStack": ["SQL", "Java"],
+    "repoUrl": null,
+    "liveUrl": null,
+    "imageUrl": null
+  },
+  {
+    "id": "games-page",
+    "title": "Games Showcase Page",
+    "description": "A dedicated HTML/CSS page showcasing games I play, with logos and descriptions. Part of the original static site.",
+    "category": "Personal Projects",
+    "techStack": ["HTML", "CSS"],
+    "repoUrl": null,
+    "liveUrl": null,
+    "imageUrl": null
+  },
+  {
+    "id": "rhythm-games",
+    "title": "Rhythm Games",
+    "description": "A deep interest in rhythm games as a genre — from osu! to Beat Saber. I enjoy the intersection of music and precision gameplay.",
+    "category": "Interests",
+    "techStack": [],
+    "repoUrl": null,
+    "liveUrl": null,
+    "imageUrl": null
+  },
+  {
+    "id": "gaming",
+    "title": "Gaming",
+    "description": "Passionate about gaming across multiple genres — competitive shooters, battle royales, and rhythm games.",
+    "category": "Interests",
+    "techStack": [],
+    "repoUrl": null,
+    "liveUrl": null,
+    "imageUrl": null
+  },
+  {
+    "id": "web-dev",
+    "title": "Web Development",
+    "description": "Interested in building modern, responsive web apps. Currently learning React, Tailwind, and full-stack patterns.",
+    "category": "Interests",
+    "techStack": ["React", "JavaScript", "Tailwind CSS"],
+    "repoUrl": null,
+    "liveUrl": null,
+    "imageUrl": null
+  },
+  {
+    "id": "tech",
+    "title": "Technology & Software",
+    "description": "Broadly interested in how software is built — from system design to UI/UX. Always exploring new tools and frameworks.",
+    "category": "Interests",
+    "techStack": [],
+    "repoUrl": null,
+    "liveUrl": null,
+    "imageUrl": null
+  }
+]

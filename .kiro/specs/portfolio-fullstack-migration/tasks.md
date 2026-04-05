@@ -1,0 +1,205 @@
+# Implementation Plan: Portfolio Full-Stack Migration
+
+## Overview
+
+Migrate the existing static HTML/CSS portfolio into a React (Vite) + Node.js/Express full-stack app. Tasks are ordered to build the backend data layer first, then the frontend shell, then individual pages, and finally wire everything together.
+
+## Tasks
+
+- [x] 1. Initialize project structure
+  - Create `client/` with Vite + React scaffold (`npm create vite@latest client -- --template react`)
+  - Create `server/` directory with `index.js`, `routes/`, and `data/` subdirectories
+  - Install frontend deps: `react-router-dom`, `framer-motion`, `tailwindcss`, `@tailwindcss/vite`
+  - Install backend deps: `express`, `cors`
+  - Install dev/test deps: `vitest`, `@testing-library/react`, `@testing-library/jest-dom`, `fast-check`, `supertest`
+  - Configure Tailwind (`tailwind.config.js`) with `darkMode: 'class'` and content paths covering `client/src/**`
+  - Configure Vite proxy so `/api/*` forwards to `http://localhost:3001` in dev
+  - _Requirements: 12.1, 12.4_
+
+- [x] 2. Build the backend data layer and API
+  - [x] 2.1 Create seed data modules in `server/data/`
+    - `profile.js` — export ProfileData with name, tagline, bio, skills (HTML, CSS, Java, SQL, JavaScript, React), contact email and GitHub
+    - `projects.js` — export ProjectData[] with three Games entries (osu!, Valorant, Fortnite), three Personal Projects entries (e.g. static portfolio site, SQL database project, games page), and four Interests entries (rhythm games, osu!, gaming, tech)
+    - `resume.js` — export ResumeData with the Backend Intern experience entry, empty education array, and skills list
+    - _Requirements: 13.1, 13.2, 13.3, 13.4_
+  - [x] 2.2 Implement Express route handlers in `server/routes/`
+    - `profile.js` — `GET /api/profile` reads from data module, responds 200 JSON or 500 on error
+    - `projects.js` — `GET /api/projects` reads from data module, responds 200 JSON array or 500 on error
+    - `resume.js` — `GET /api/resume` reads from data module, responds 200 JSON or 500 on error
+    - Each handler wraps logic in try/catch; error response is `{ "error": "Internal server error" }`
+    - _Requirements: 7.1, 7.2, 7.4, 8.1, 8.2, 8.4, 9.1, 9.2, 9.4_
+  - [x] 2.3 Wire routes into `server/index.js`
+    - Mount `cors()` middleware and `express.json()`
+    - Register all three route files under `/api`
+    - Listen on port 3001
+    - _Requirements: 7.1, 8.1, 9.1_
+  - [ ]* 2.4 Write integration tests for API endpoints
+    - Use Supertest against the Express app (not a live server)
+    - `GET /api/profile` → 200, body has `name`, `tagline`, `bio`, `skills`, `contact.email`, `contact.github`; name equals "Johnny Tran"
+    - `GET /api/projects` → 200, body is array, each item has `id`, `title`, `description`, `category`, `techStack`, `repoUrl`, `liveUrl`, `imageUrl`; at least one entry exists
+    - `GET /api/resume` → 200, body has `experience` (non-empty), `education`, `skills`
+    - Force-throw inside a handler and assert 500 + `{ error: "Internal server error" }`
+    - _Requirements: 7.2, 7.3, 8.2, 8.3, 9.2, 9.3_
+
+- [ ] 3. Checkpoint — Ensure all backend tests pass
+  - Run `vitest --run` from the project root; all integration tests must be green before proceeding.
+
+- [x] 4. Build the frontend shell and shared components
+  - [x] 4.1 Create `client/src/api/` modules
+    - `profile.js` — `fetchProfile()` calls `GET /api/profile`
+    - `projects.js` — `fetchProjects()` calls `GET /api/projects`
+    - `resume.js` — `fetchResume()` calls `GET /api/resume`
+    - Each function throws on non-ok HTTP status
+    - _Requirements: 12.2_
+  - [x] 4.2 Implement `useFetch(url)` hook in `client/src/hooks/useFetch.js`
+    - Returns `{ data, loading, error }`; fetches on mount; catches network and HTTP errors
+    - _Requirements: 5.2, 5.5, 6.2, 6.4_
+  - [x] 4.3 Implement `useDarkMode()` hook in `client/src/hooks/useDarkMode.js`
+    - Reads `localStorage` key `"theme"`; falls back to `prefers-color-scheme` if unavailable
+    - Toggles `dark` class on `<html>`; returns `[isDark, toggle]`
+    - _Requirements: (dark mode — design section)_
+  - [x] 4.4 Implement shared UI components in `client/src/components/`
+    - `AnimatedPage.jsx` — Framer Motion `motion.div` with `opacity: 0→1`, `y: 16→0`, duration ≤ 400ms; when `prefers-reduced-motion` is active render children with no motion props
+    - `LoadingSpinner.jsx` — centered spinner element
+    - `ErrorMessage.jsx` — renders a human-readable error string
+    - `SkillTag.jsx` — pill badge for a skill string
+    - `DarkModeToggle.jsx` — button that calls `useDarkMode` toggle
+    - _Requirements: 3.4, 4.4, 5.6, 6.6, 11.1, 11.3_
+  - [x] 4.5 Implement `NavBar` component in `client/src/components/NavBar.jsx`
+    - Renders logo/home link (`/`) and links for `/about`, `/projects`, `/resume`
+    - Applies active indicator to the link matching the current route (use `NavLink` from React Router)
+    - Hamburger toggle visible below 768px; clicking it expands/collapses links; clicking a link collapses the menu
+    - Includes `DarkModeToggle`
+    - _Requirements: 1.4, 1.5, 2.1, 2.2, 2.3, 2.4, 2.5_
+  - [ ]* 4.6 Write unit tests for NavBar
+    - Renders all four route links and the home link
+    - Hamburger toggle shows and hides links
+    - Menu collapses after a link is clicked
+    - _Requirements: 2.1, 2.3, 2.4, 2.5_
+  - [x] 4.7 Set up React Router in `client/src/main.jsx` and `client/src/App.jsx`
+    - Wrap app in `BrowserRouter`; define routes for `/`, `/about`, `/projects`, `/resume`, and `*` (NotFoundPage)
+    - Render `NavBar` outside the route outlet so it appears on every page
+    - _Requirements: 1.1, 1.2, 1.3_
+  - [ ]* 4.8 Write property test — NavBar present on every page (Property 1)
+    - **Property 1: NavBar is present on every page**
+    - For each of the four primary routes, render the full app at that route and assert NavBar is in the output
+    - **Validates: Requirements 2.1**
+  - [ ]* 4.9 Write property test — NavBar active indicator matches route (Property 2)
+    - **Property 2: NavBar active indicator matches current route**
+    - For any of the four routes, assert exactly one nav link carries the active class and it matches the current route
+    - **Validates: Requirements 1.5**
+
+- [x] 5. Implement page components
+  - [x] 5.1 Implement `HomePage` in `client/src/pages/HomePage.jsx`
+    - Fetch ProfileData via `useFetch('/api/profile')`; show `LoadingSpinner` while loading, `ErrorMessage` on error
+    - Display `name`, `tagline`, and `bio` from ProfileData
+    - Render CTA links to `/projects` and `/resume`
+    - Wrap in `AnimatedPage`
+    - _Requirements: 3.1, 3.2, 3.3, 3.4_
+  - [ ]* 5.2 Write property test — Home Page renders all ProfileData fields (Property 3)
+    - **Property 3: Home Page renders all ProfileData fields**
+    - Generate arbitrary valid ProfileData (non-empty name, tagline, bio); render HomePage with mocked fetch; assert all three fields appear
+    - **Validates: Requirements 3.1, 3.2**
+  - [x] 5.3 Implement `AboutPage` in `client/src/pages/AboutPage.jsx`
+    - Fetch ProfileData via `useFetch('/api/profile')`; show `LoadingSpinner` / `ErrorMessage` as needed
+    - Display bio, skills as `SkillTag` list, and contact links (email, GitHub)
+    - Wrap in `AnimatedPage`
+    - _Requirements: 4.1, 4.2, 4.3, 4.4_
+  - [ ]* 5.4 Write property test — About Page renders all ProfileData fields (Property 4)
+    - **Property 4: About Page renders all ProfileData fields**
+    - Generate arbitrary valid ProfileData; render AboutPage with mocked fetch; assert bio, all skill tags, email link, and GitHub link appear
+    - **Validates: Requirements 4.1, 4.2, 4.3**
+  - [x] 5.5 Implement `ProjectCard` component in `client/src/components/ProjectCard.jsx`
+    - Displays title, description, tech stack tags (`SkillTag`), and optional image
+    - Accepts `project: ProjectData` and `index: number` props; `index` drives Framer Motion stagger delay (≤ 100ms per card)
+    - _Requirements: 5.4, 5.7_
+  - [ ]* 5.6 Write property test — Project card displays all required fields (Property 6)
+    - **Property 6: Project card displays all required fields**
+    - Generate arbitrary ProjectData; render ProjectCard; assert title, description, and all techStack tags appear
+    - **Validates: Requirements 5.4**
+  - [x] 5.7 Implement `ProjectsPage` in `client/src/pages/ProjectsPage.jsx`
+    - Fetch ProjectData[] via `useFetch('/api/projects')`; show `LoadingSpinner` / `ErrorMessage` as needed
+    - Group entries by `category` and render each group under its own heading
+    - Render one `ProjectCard` per entry with staggered entry animation
+    - Wrap in `AnimatedPage`
+    - _Requirements: 5.1, 5.2, 5.3, 5.4, 5.5, 5.6, 5.7_
+  - [ ]* 5.8 Write property test — Projects Page renders one card per project (Property 5)
+    - **Property 5: Projects Page renders one card per project**
+    - Generate arbitrary non-empty ProjectData[]; render ProjectsPage with mocked fetch; assert card count equals array length
+    - **Validates: Requirements 5.3**
+  - [ ]* 5.9 Write unit tests for ProjectsPage
+    - Shows loading spinner while fetching
+    - Shows error message when fetch fails
+    - _Requirements: 5.2, 5.5_
+  - [x] 5.10 Implement `ResumePage` in `client/src/pages/ResumePage.jsx`
+    - Fetch ResumeData via `useFetch('/api/resume')`; show `LoadingSpinner` / `ErrorMessage` as needed
+    - Render experience entries, education entries, and skills list
+    - Include a downloadable PDF resume link/button
+    - Wrap in `AnimatedPage`
+    - _Requirements: 6.1, 6.2, 6.3, 6.4, 6.5, 6.6_
+  - [ ]* 5.11 Write property test — Resume Page renders all ResumeData entries (Property 7)
+    - **Property 7: Resume Page renders all ResumeData entries**
+    - Generate arbitrary valid ResumeData; render ResumePage with mocked fetch; assert all experience entries, education entries, and skills appear
+    - **Validates: Requirements 6.3**
+  - [ ]* 5.12 Write unit tests for ResumePage
+    - Shows loading spinner while fetching
+    - Shows error message when fetch fails
+    - Shows PDF download link
+    - _Requirements: 6.2, 6.4, 6.5_
+  - [x] 5.13 Implement `NotFoundPage` in `client/src/pages/NotFoundPage.jsx`
+    - Renders a 404 message and a link back to `/`
+    - _Requirements: 1.3_
+  - [ ]* 5.14 Write unit test — Router renders 404 for unknown paths
+    - Navigate to an undefined route and assert NotFoundPage content is rendered
+    - _Requirements: 1.3_
+
+- [ ] 6. Checkpoint — Ensure all frontend tests pass
+  - Run `vitest --run` from the project root; all unit and property tests must be green before proceeding.
+
+- [x] 7. Apply dark theme and responsive layout
+  - [x] 7.1 Configure global dark theme styles in `client/src/index.css`
+    - Set dark background (`bg-gray-950`) and light text as defaults under the `dark` class
+    - Choose a single accent color (purple — `purple-500` / `purple-400`) and apply consistently to links, active nav indicators, skill tags, and CTA buttons
+    - _Requirements: 10.1_
+  - [x] 7.2 Apply Tailwind responsive classes across all page and component files
+    - Single-column layouts below 768px; multi-column grid for project cards at ≥ 768px
+    - Ensure no horizontal overflow from 320px to 1920px
+    - _Requirements: 10.1, 10.2, 10.3, 10.4_
+  - [ ]* 7.3 Write property test — No horizontal overflow at any viewport width (Property 8)
+    - **Property 8: No horizontal overflow at any standard viewport width**
+    - For viewport widths in [320, 1920], render each page and assert `scrollWidth <= clientWidth`
+    - **Validates: Requirements 10.4**
+  - [ ]* 7.4 Write property test — Reduced-motion disables AnimatedPage transitions (Property 9)
+    - **Property 9: Reduced-motion disables AnimatedPage transitions**
+    - Mock `prefers-reduced-motion: reduce`; render any AnimatedPage-wrapped component; assert no opacity or y-offset motion props are applied
+    - **Validates: Requirements 11.3**
+
+- [x] 8. Final wiring and integration
+  - [x] 8.1 Copy existing image assets into `client/src/assets/`
+    - Copy `games/osu-logo.jpg` → `client/src/assets/osu-logo.jpg`
+    - Copy `games/fortnite logo.jpg` → `client/src/assets/fortnite-logo.jpg`
+    - Update `imageUrl` references in `server/data/projects.js` to match served paths
+    - _Requirements: 13.2_
+  - [x] 8.2 Add a PDF resume placeholder and wire the download link
+    - Place a `resume.pdf` file (or placeholder) in `client/public/`
+    - Ensure the ResumePage download link points to `/resume.pdf`
+    - _Requirements: 6.5_
+  - [x] 8.3 Verify end-to-end data flow for all four pages
+    - Confirm each page fetches from the correct `/api/*` endpoint and renders seed data correctly
+    - Confirm dark mode toggle persists across route changes and page refresh
+    - _Requirements: 3.1, 4.1, 5.1, 6.1_
+  - [ ]* 8.4 Write unit test — `useDarkMode` toggles class and persists to localStorage
+    - Assert `dark` class is added/removed on `<html>` and `localStorage` is updated on toggle
+    - _Requirements: (dark mode — design section)_
+
+- [ ] 9. Final checkpoint — Ensure all tests pass
+  - Run `vitest --run` from the project root; all tests (unit, property, integration) must be green.
+  - Verify the app starts cleanly with `npm run dev` (run manually in terminal).
+
+## Notes
+
+- Tasks marked with `*` are optional and can be skipped for a faster MVP
+- Each task references specific requirements for traceability
+- Property tests use `fast-check` and must run a minimum of 100 iterations each
+- The accent color is purple throughout — do not mix in blue
+- The `dark` class strategy means all dark-mode styles are prefixed with `dark:` in Tailwind
