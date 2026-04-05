@@ -70,9 +70,9 @@ export function ProjectsPage() {
                 <span className="text-gray-500 text-sm">{filtered.length} items</span>
               </div>
 
-              {/* Subcategory filter tabs */}
+              {/* Subcategory filter tabs + search */}
               {subs.length > 1 && (
-                <div className="flex flex-wrap gap-2 mb-6">
+                <div className="flex flex-wrap items-center gap-2 mb-6">
                   {subs.map(sub => (
                     <button
                       key={sub}
@@ -89,6 +89,14 @@ export function ProjectsPage() {
                       {sub}
                     </button>
                   ))}
+                  <input
+                    type="text"
+                    placeholder="Search..."
+                    value={searchQuery[category] || ''}
+                    onChange={e => setSearchQuery(prev => ({ ...prev, [category]: e.target.value }))}
+                    className="ml-auto px-3 py-1.5 rounded-full text-xs bg-gray-800 border border-gray-700
+                               text-gray-300 placeholder-gray-600 focus:outline-none focus:border-purple-600/60 w-32"
+                  />
                 </div>
               )}
 
