@@ -16,7 +16,7 @@ function groupByCategory(projects) {
 }
 
 export function ProjectsPage() {
-  const { data: projects, loading, error } = useFetch('/api/projects')
+  const { data: projects, loading, error } = useFetch(`${API_BASE}/api/projects`)
 
   if (loading) return <LoadingSpinner />
   if (error) return <ErrorMessage message={error} />
