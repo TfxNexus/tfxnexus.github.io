@@ -56,19 +56,18 @@ I care deeply about **clean code**, **thoughtful design**, and **building things
 
 ### 🎵 **osu!**
 - **Global Rank:** #3,022
-- **Country Rank:** #50 (Vietnam)
+- **Country Rank:** #31 (Vietnam)
 - **PP:** 11,808
-- **Accuracy:** 98.8%
-- **Peak Rank:** #2,900
+- **Accuracy:** 99.12%
+- **Peak Rank:** #2,600
 
 </td>
 <td width="50%" valign="top">
 
 ### ♟️ **Chess.com**
-- **Blitz:** 1774
-- **Rapid:** 1650
-- **Bullet:** 1589
-- **Puzzle Rating:** 2100+
+- **Blitz:** 1700
+- **Rapid:** 1800
+- **Bullet:** 2100
 
 </td>
 </tr>
@@ -77,17 +76,14 @@ I care deeply about **clean code**, **thoughtful design**, and **building things
 
 ### 🏆 **Fortnite**
 - **Peak Rank:** Unreal
-- **Competitive Season:** Chapter 4
-- **Highest Placement:** Top 500 APAC
 
 </td>
 <td width="50%" valign="top">
 
 ### 📺 **YouTube**
 - **Subscribers:** 1.4K+
-- **Total Views:** 180K+
-- **Content:** osu! gameplay, tutorials
-
+- **Total Views:** 12k
+- **Content:** various gameplays
 </td>
 </tr>
 </table>
