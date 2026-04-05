@@ -7,6 +7,7 @@ const links = [
   { to: '/about', label: 'About' },
   { to: '/projects', label: 'Projects' },
   { to: '/resume', label: 'Resume' },
+  { to: '/history', label: 'History' },
 ]
 
 function navLinkClass({ isActive }) {
