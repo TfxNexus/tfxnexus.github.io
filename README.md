@@ -15,14 +15,14 @@
 
 ## 🚀 About Me
 
-I'm a **web and games developer** passionate about building clean, functional experiences. Born in Bangkok 🇹🇭, raised in Vietnam 🇻🇳, I'm currently studying at **RMIT University** with a **50% merit scholarship** — recognition that drives me to keep pushing my limits every day.
+I'm a **web and games developer** passionate about building clean, functional experiences. Born in Bangkok 🇹🇭, raised in Vietnam 🇻🇳, I'm currently studying at **RMIT University** with a **50% merit scholarship** - recognition that makes me really happy and to keep pushing my limits every day.
 
-- 🎓 **RMIT University** — Bachelor's in IT (March 2025 - Present)
-- 💼 **Backend Intern** — Built SQL databases, designed tables/views, connected to frontend apps
-- 🎮 **Competitive Gamer** — osu! (Global #3,022), Fortnite (Unreal Rank), Chess.com (1774 Blitz)
-- 📺 **Content Creator** — 1.4K+ subscribers on YouTube sharing osu! gameplay
+- 🎓 **RMIT University** - Bachelor's in IT (March 2025 - Present)
+- 💼 **Backend Intern** - Built SQL databases, designed tables/views, connected to frontend apps
+- 🎮 **Competitive Gamer** - osu! (Global #3,022), Fortnite (Unreal Rank), Chess.com (1774 Blitz)
+- 📺 **Content Creator** - 1.4K+ subscribers on YouTube sharing osu! gameplay
 
-I care deeply about **clean code**, **thoughtful design**, and **building things that actually work**. Whether it's a full-stack web app or hitting a perfect combo in osu!, I bring the same focus and dedication.
+I care deeply about **clean code**, **good architecture**, and **building things that actually work**. Whether it's a full-stack web app or hitting a perfect combo in osu! (cringe I know), I bring the same focus and dedication.
 
 ---
 
@@ -92,17 +92,17 @@ I care deeply about **clean code**, **thoughtful design**, and **building things
 
 ## 💻 Featured Projects
 
-### [**Portfolio v2**](https://tfxnexus.vercel.app) — Full-Stack Personal Website
+### [**Portfolio v2**](https://tfxnexus.vercel.app) - Full-Stack Personal Website
 A modern, animated portfolio built with React, Express, and Tailwind CSS. Features live API integrations for osu!, Chess.com, Clash Royale, Clash of Clans, and YouTube stats. Deployed on Vercel + Render.
 
 **Tech:** React • Express • Tailwind CSS • Framer Motion • REST APIs • Vite
 
-### **SQL Database System** — Backend Internship Project
+### **SQL Database System** - Backend Project
 Designed and implemented a relational database with complex table structures, views, and frontend connections. Focused on data integrity, efficient queries, and scalable architecture.
 
 **Tech:** SQL • Java • Database Design
 
-### **Static Portfolio v1** — My First Website
+### **Static Portfolio v1** - My First Website
 A clean, minimal portfolio built with pure HTML and CSS. My introduction to web development and the foundation that led me to where I am today.
 
 **Tech:** HTML • CSS
@@ -144,7 +144,7 @@ A clean, minimal portfolio built with pure HTML and CSS. My introduction to web 
 
 <div align="center">
 
-### 💡 "Hard work beats talent when talent doesn't work hard."
+### 💡 "I am him."
 
 ![Profile Views](https://komarev.com/ghpvc/?username=TfxNexus&color=8B5CF6&style=flat-square)
 
